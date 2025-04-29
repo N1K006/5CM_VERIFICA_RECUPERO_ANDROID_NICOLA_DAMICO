@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Container responsive con stretch e shrink -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="*"
+        android:shrinkColumns="*"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- RIGA 1: Obiettivo Calorico -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <EditText
+                    android:id="@+id/t_obb_kcal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="Calorie"
+                    android:inputType="number"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/b_obb_kcal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="b_obb_calorie"
+                    android:text="Imposta obiettivo calorie" />
+
+            </LinearLayout>
+        </TableRow>
+
+        <!-- RIGA 2: Selezione attività -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="8dp">
+
+                <Button
+                    android:id="@+id/but_corsa"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="b_corsa"
+                    android:text="Corsa"
+                    android:backgroundTint="@color/corsa_blue" />
+
+                <Button
+                    android:id="@+id/but_ciclismo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="b_ciclismo"
+                    android:text="Ciclismo"
+                    android:backgroundTint="@color/ciclismo_green" />
+
+                <Button
+                    android:id="@+id/but_palestra"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="b_palestra"
+                    android:text="Palestra"
+                    android:backgroundTint="@color/palestra_orange" />
+
+                <Button
+                    android:id="@+id/but_riposo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="b_riposo"
+                    android:text="Riposo"
+                    android:backgroundTint="@color/riposo_gray" />
+
+            </LinearLayout>
+        </TableRow>
+
+        <!-- RIGA 3: Input durata e kcal -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <EditText
+                    android:id="@+id/t_durata"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:visibility="gone"
+                    android:hint="Durata (min)"
+                    android:layout_marginBottom="8dp" />
+
+                <EditText
+                    android:id="@+id/t_kcal_bruciate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:visibility="gone"
+                    android:hint="Calorie bruciate"
+                    android:layout_marginBottom="8dp" />
+
+                <Button
+                    android:id="@+id/but_invia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="b_invia"
+                    android:visibility="gone"
+                    android:text="Invia" />
+
+            </LinearLayout>
+        </TableRow>
+
+        <!-- RIGA 4: Risultati -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Totale calorie:" />
+
+            </LinearLayout>
+        </TableRow>
+
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

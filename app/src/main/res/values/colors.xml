@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="corsa_blue">#00AAFF</color>
+    <color name="ciclismo_green">#00FF00</color>
+    <color name="palestra_orange">#FFA500</color>
+    <color name="riposo_gray">#808080</color>
+</resources>
