@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Container responsive con stretch e shrink -->
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,7 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- RIGA 1: Obiettivo Calorico -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -45,11 +43,9 @@
                     android:layout_gravity="center_horizontal"
                     android:onClick="b_obb_calorie"
                     android:text="Imposta obiettivo calorie" />
-
             </LinearLayout>
         </TableRow>
 
-        <!-- RIGA 2: Selezione attività -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -58,13 +54,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="8dp">
+                android:weightSum="100"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:paddingStart="0dp"
+                android:paddingEnd="0dp">
 
                 <Button
                     android:id="@+id/but_corsa"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="22"
+                    android:minWidth="0dp"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:ellipsize="none"
                     android:onClick="b_corsa"
                     android:text="Corsa"
                     android:backgroundTint="@color/corsa_blue" />
@@ -73,7 +77,10 @@
                     android:id="@+id/but_ciclismo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="28"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:ellipsize="none"
                     android:onClick="b_ciclismo"
                     android:text="Ciclismo"
                     android:backgroundTint="@color/ciclismo_green" />
@@ -82,7 +89,10 @@
                     android:id="@+id/but_palestra"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="28"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:ellipsize="none"
                     android:onClick="b_palestra"
                     android:text="Palestra"
                     android:backgroundTint="@color/palestra_orange" />
@@ -91,7 +101,11 @@
                     android:id="@+id/but_riposo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="22"
+                    android:minWidth="0dp"
+                    android:textSize="12sp"
+                    android:maxLines="1"
+                    android:ellipsize="none"
                     android:onClick="b_riposo"
                     android:text="Riposo"
                     android:backgroundTint="@color/riposo_gray" />
@@ -99,7 +113,6 @@
             </LinearLayout>
         </TableRow>
 
-        <!-- RIGA 3: Input durata e kcal -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -141,7 +154,6 @@
             </LinearLayout>
         </TableRow>
 
-        <!-- RIGA 4: Risultati -->
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

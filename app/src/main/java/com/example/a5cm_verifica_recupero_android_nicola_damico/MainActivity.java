@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
     private int kcal_palestra = 0;
     private int durata_riposo = 0;
     private int kcal_riposo = 0;
+    double percentuale_corsa = 0;
+    double percentuale_ciclismo = 0;
+    double percentuale_palestra = 0;
+    double percentuale_obiettivo = 0;
 
     private EditText tDurata;
     private EditText tKcalBruciate;
@@ -97,73 +101,94 @@ public class MainActivity extends AppCompatActivity {
         setAttivitaButtonsEnabled(false);
     }
 
-    private void setAttivitaButtonsEnabled(boolean visivility) {
+    private void evidenziaAttivita()
+    {
+        Button[] bottoni_attivita = { butCorsa, butCiclismo, butPalestra, butRiposo };
+        for (Button b : bottoni_attivita)
+        {
+            b.setAlpha(0.5f);
+        }
+    }
+
+    private void setAttivitaButtonsEnabled(boolean visivility)
+    {
         butCorsa.setEnabled(visivility);
         butCiclismo.setEnabled(visivility);
         butPalestra.setEnabled(visivility);
         butRiposo.setEnabled(visivility);
     }
 
-    private void mostraInputAttivita() {
+    private void mostraInputAttivita()
+    {
         tDurata.setVisibility(View.VISIBLE);
         tKcalBruciate.setVisibility(View.VISIBLE);
         butInvia.setVisibility(View.VISIBLE);
     }
 
-
     public void b_obb_calorie(View v) {
         Button b = (Button) v;
         Integer calorie = null;
-        try {
+        try
+        {
             calorie = Integer.parseInt(tObbKcal.getText().toString());
-        } catch (NumberFormatException e) {
-            return;
         }
-        if (calorie != null && calorie > 0) {
-            calorieObiettivoImpostato = true;
-            // Assegna il valore dell'EditText alla variabile calorieObiettivo
-            calorieObiettivo = calorie;
-            tObbKcal.setEnabled(false);
-            bObbKcal.setEnabled(false);
-            setAttivitaButtonsEnabled(true);
-        } else {
+        catch (NumberFormatException e)
+        {
             calorieObiettivoImpostato = false;
             tObbKcal.setEnabled(true);
             bObbKcal.setEnabled(true);
             setAttivitaButtonsEnabled(false);
-            Toast.makeText(getApplicationContext(), "L'obiettivo calorie deve essere maggiore di 0.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "L'obiettivo calorie deve essere maggiore di 0.", Toast.LENGTH_SHORT).show();
+            return;
         }
+        calorieObiettivoImpostato = true;
+        // Assegna il valore dell'EditText alla variabile calorieObiettivo
+        calorieObiettivo = calorie;
+        tObbKcal.setEnabled(false);
+        bObbKcal.setEnabled(false);
+        setAttivitaButtonsEnabled(true);
     }
+
+     private void ResetEditText_e_B()
+     {
+         tDurata.setText("");
+         tKcalBruciate.setText("");
+
+         b_corsa_impostato = false;
+         b_riposo_impostato = false;
+         b_palestra_impostato = false;
+         b_ciclismo_impostato = false;
+     }
 
     public void b_corsa(View v) {
         mostraInputAttivita();
+        evidenziaAttivita();
+        butCorsa.setAlpha(1f);
+        ResetEditText_e_B();
         b_corsa_impostato = true;
-        b_ciclismo_impostato = false;
-        b_palestra_impostato = false;
-        b_riposo_impostato = false;
     }
 
     public void b_ciclismo(View v) {
         mostraInputAttivita();
-        b_corsa_impostato = false;
+        evidenziaAttivita();
+        butCiclismo.setAlpha(1f);
+        ResetEditText_e_B();
         b_ciclismo_impostato = true;
-        b_palestra_impostato = false;
-        b_riposo_impostato = false;
     }
 
     public void b_palestra(View v) {
         mostraInputAttivita();
-        b_corsa_impostato = false;
-        b_ciclismo_impostato = false;
+        evidenziaAttivita();
+        butPalestra.setAlpha(1f);
+        ResetEditText_e_B();
         b_palestra_impostato = true;
-        b_riposo_impostato = false;
     }
 
     public void b_riposo(View v) {
         mostraInputAttivita();
-        b_corsa_impostato = false;
-        b_ciclismo_impostato = false;
-        b_palestra_impostato = false;
+        evidenziaAttivita();
+        butRiposo.setAlpha(1f);
+        ResetEditText_e_B();
         b_riposo_impostato = true;
     }
 
@@ -171,37 +196,88 @@ public class MainActivity extends AppCompatActivity {
     public void b_invia(View v) {
         Button b = (Button) v;
 
-        if (calorieObiettivoImpostato) {
-            if (b_corsa_impostato) {
-                if (!tDurata.getText().toString().isEmpty() && !tKcalBruciate.getText().toString().isEmpty()) {
-                    durata_corsa = Integer.parseInt(tDurata.getText().toString());
-                    kcal_corsa = Integer.parseInt(tKcalBruciate.getText().toString());
+
+        if (!tKcalBruciate.getText().toString().isEmpty() && !tDurata.getText().toString().isEmpty())
+        {
+            if (Integer.parseInt(tKcalBruciate.getText().toString()) <= 300 && Integer.parseInt(tKcalBruciate.getText().toString()) > 0 )
+            {
+                if (Integer.parseInt((tDurata.getText().toString())) < 120)
+                {
+                    if (calorieObiettivoImpostato)
+                    {
+                        if (b_corsa_impostato)
+                        {
+                            durata_corsa = Integer.parseInt(tDurata.getText().toString());
+                            kcal_corsa = Integer.parseInt(tKcalBruciate.getText().toString());
+                        }
+                        else if (b_ciclismo_impostato)
+                        {
+                            durata_ciclismo = Integer.parseInt(tDurata.getText().toString());
+                            kcal_ciclismo = Integer.parseInt(tKcalBruciate.getText().toString());
+                        }
+                        else if (b_palestra_impostato)
+                        {
+                            durata_palestra = Integer.parseInt(tDurata.getText().toString());
+                            kcal_palestra = Integer.parseInt(tKcalBruciate.getText().toString());
+                        }
+                        else if (b_riposo_impostato)
+                        {
+                            durata_riposo = Integer.parseInt(tDurata.getText().toString());
+                            kcal_riposo = Integer.parseInt(tKcalBruciate.getText().toString());
+                        }
+                        else
+                        {
+                            Toast.makeText(this, "Completa tutti i campi", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+
+                        tDurata.setText("");
+                        tKcalBruciate.setText("");
+
+                        int tot_cal_bruciate = ((kcal_corsa + kcal_ciclismo + kcal_palestra) - kcal_riposo);
+
+                        if (tot_cal_bruciate < 0)
+                        {
+                            Toast.makeText(this, "Errore: Calorie bruciate scese sotto lo zero", Toast.LENGTH_SHORT).show();
+                            ResetEditText_e_B();
+                            return;
+                        }
+
+
+                        if (kcal_corsa > 0 && kcal_palestra > 0 && kcal_ciclismo > 0)
+                        {
+                            percentuale_corsa = ((double) kcal_corsa / tot_cal_bruciate) * 100;
+                            percentuale_ciclismo = ((double) kcal_ciclismo / tot_cal_bruciate) * 100;
+                            percentuale_palestra = ((double) kcal_palestra / tot_cal_bruciate) * 100;
+                            percentuale_obiettivo = ((double) tot_cal_bruciate / Integer.parseInt(tObbKcal.getText().toString())) * 100;
+
+
+                            if (percentuale_corsa > 70 || percentuale_ciclismo > 70 || percentuale_palestra > 70)
+                            {
+                                Toast.makeText(this, "Percentuale di calorie bruciate troppo alte!", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+
+                        tView.setText("Obiettivo Calorico: " + calorieObiettivo  + "\n\n"+
+                                "Totale Attività:" +
+                                "\nCorsa: " + kcal_corsa + "kcal (" + percentuale_corsa + "%) - " + durata_corsa + " min" +
+                                "\nCiclismo: " + kcal_ciclismo + "kcal  (" + percentuale_ciclismo + "%)- " + durata_ciclismo + " min" +
+                                "\nPalestra: " + kcal_palestra + "kcal  (" + percentuale_palestra + "%)- " + durata_palestra + " min" +
+                                "\nRiposo: " + kcal_riposo + "kcal - :" + durata_riposo + " min" +
+                                "\nTotale Calorie Bruciate Nette: " + tot_cal_bruciate + " kcal" +
+                                "\nHai raggiunto il (" + percentuale_obiettivo + "%) dell'obiettivo");
+                    }
                 }
-            } else if (b_ciclismo_impostato) {
-                if (!tDurata.getText().toString().isEmpty() && !tKcalBruciate.getText().toString().isEmpty()) {
-                    durata_ciclismo = Integer.parseInt(tDurata.getText().toString());
-                    kcal_ciclismo = Integer.parseInt(tKcalBruciate.getText().toString());
-                }
-            } else if (b_palestra_impostato) {
-                if (!tDurata.getText().toString().isEmpty() && !tKcalBruciate.getText().toString().isEmpty()) {
-                    durata_palestra = Integer.parseInt(tDurata.getText().toString());
-                    kcal_palestra = Integer.parseInt(tKcalBruciate.getText().toString());
-                }
-            } else if (b_riposo_impostato) {
-                if (!tDurata.getText().toString().isEmpty() && !tKcalBruciate.getText().toString().isEmpty()) {
-                    durata_riposo = Integer.parseInt(tDurata.getText().toString());
-                    kcal_riposo = Integer.parseInt(tKcalBruciate.getText().toString());
+                else
+                {
+                    Toast.makeText(this, "Non puoi inserire più di 120 min per attività", Toast.LENGTH_SHORT).show();
                 }
             }
-
-            tView.setText("Obiettivo Calorico:\n " + calorieObiettivo +
-                    "Totale Attività: \n" +
-                    "\nCorsa: " + kcal_corsa + "kcal - :" + durata_corsa + " min" +
-                    "\nCiclismo: " + kcal_ciclismo + "kcal - :" + durata_ciclismo + " min" +
-                    "\nPalestra: " + kcal_palestra + "kcal - :" + durata_palestra + " min" +
-                    "\nRiposo: " + kcal_riposo + "kcal - :" + durata_riposo + " min" +
-                    "\nTotale Calorie Bruciate Nette: " + (kcal_corsa + kcal_ciclismo + kcal_palestra - kcal_riposo) + " kcal" +
-                    "\nHai raggiunto il 70% dell'obiettivo");
+            else
+            {
+                Toast.makeText(this, "Non puoi inserire più di 300 kcal", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }
