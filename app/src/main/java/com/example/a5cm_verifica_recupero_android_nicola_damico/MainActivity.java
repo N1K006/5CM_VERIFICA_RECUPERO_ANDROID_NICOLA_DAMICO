@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
     private int kcal_palestra = 0;
     private int durata_riposo = 0;
     private int kcal_riposo = 0;
-    double percentuale_corsa = 0;
-    double percentuale_ciclismo = 0;
-    double percentuale_palestra = 0;
-    double percentuale_obiettivo = 0;
+    float percentuale_corsa = 0;
+    float percentuale_ciclismo = 0;
+    float percentuale_palestra = 0;
+    float percentuale_obiettivo = 0;
 
     private EditText tDurata;
     private EditText tKcalBruciate;
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void b_obb_calorie(View v) {
         Button b = (Button) v;
-        Integer calorie = null;
+        int calorie = 0;
         try
         {
             calorie = Integer.parseInt(tObbKcal.getText().toString());
@@ -207,23 +207,23 @@ public class MainActivity extends AppCompatActivity {
                     {
                         if (b_corsa_impostato)
                         {
-                            durata_corsa = Integer.parseInt(tDurata.getText().toString());
-                            kcal_corsa = Integer.parseInt(tKcalBruciate.getText().toString());
+                            durata_corsa += Integer.parseInt(tDurata.getText().toString());
+                            kcal_corsa += Integer.parseInt(tKcalBruciate.getText().toString());
                         }
                         else if (b_ciclismo_impostato)
                         {
-                            durata_ciclismo = Integer.parseInt(tDurata.getText().toString());
-                            kcal_ciclismo = Integer.parseInt(tKcalBruciate.getText().toString());
+                            durata_ciclismo += Integer.parseInt(tDurata.getText().toString());
+                            kcal_ciclismo += Integer.parseInt(tKcalBruciate.getText().toString());
                         }
                         else if (b_palestra_impostato)
                         {
-                            durata_palestra = Integer.parseInt(tDurata.getText().toString());
-                            kcal_palestra = Integer.parseInt(tKcalBruciate.getText().toString());
+                            durata_palestra += Integer.parseInt(tDurata.getText().toString());
+                            kcal_palestra += Integer.parseInt(tKcalBruciate.getText().toString());
                         }
                         else if (b_riposo_impostato)
                         {
-                            durata_riposo = Integer.parseInt(tDurata.getText().toString());
-                            kcal_riposo = Integer.parseInt(tKcalBruciate.getText().toString());
+                            durata_riposo += Integer.parseInt(tDurata.getText().toString());
+                            kcal_riposo += Integer.parseInt(tKcalBruciate.getText().toString());
                         }
                         else
                         {
@@ -243,30 +243,26 @@ public class MainActivity extends AppCompatActivity {
                             return;
                         }
 
+                        percentuale_corsa = ((float) kcal_corsa / calorieObiettivo * 100);
+                        percentuale_ciclismo = ((float) kcal_ciclismo / calorieObiettivo * 100);
+                        percentuale_palestra = ((float) kcal_palestra / calorieObiettivo * 100);
+                        percentuale_obiettivo = ((float) tot_cal_bruciate / calorieObiettivo * 100);
 
-                        if (kcal_corsa > 0 && kcal_palestra > 0 && kcal_ciclismo > 0)
+
+                        if (percentuale_corsa > 70 || percentuale_ciclismo > 70 || percentuale_palestra > 70)
                         {
-                            percentuale_corsa = ((double) kcal_corsa / tot_cal_bruciate) * 100;
-                            percentuale_ciclismo = ((double) kcal_ciclismo / tot_cal_bruciate) * 100;
-                            percentuale_palestra = ((double) kcal_palestra / tot_cal_bruciate) * 100;
-                            percentuale_obiettivo = ((double) tot_cal_bruciate / Integer.parseInt(tObbKcal.getText().toString())) * 100;
-
-
-                            if (percentuale_corsa > 70 || percentuale_ciclismo > 70 || percentuale_palestra > 70)
-                            {
-                                Toast.makeText(this, "Percentuale di calorie bruciate troppo alte!", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
+                            Toast.makeText(this, "Percentuale di calorie bruciate troppo alte!", Toast.LENGTH_SHORT).show();
+                            return;
                         }
 
                         tView.setText("Obiettivo Calorico: " + calorieObiettivo  + "\n\n"+
                                 "Totale Attività:" +
-                                "\nCorsa: " + kcal_corsa + "kcal (" + percentuale_corsa + "%) - " + durata_corsa + " min" +
-                                "\nCiclismo: " + kcal_ciclismo + "kcal  (" + percentuale_ciclismo + "%)- " + durata_ciclismo + " min" +
-                                "\nPalestra: " + kcal_palestra + "kcal  (" + percentuale_palestra + "%)- " + durata_palestra + " min" +
+                                "\nCorsa: " + kcal_corsa + "kcal (" + (int) percentuale_corsa + "%) - " + durata_corsa + " min" +
+                                "\nCiclismo: " + kcal_ciclismo + "kcal  (" + (int) percentuale_ciclismo + "%)- " + durata_ciclismo + " min" +
+                                "\nPalestra: " + kcal_palestra + "kcal  (" + (int) percentuale_palestra + "%)- " + durata_palestra + " min" +
                                 "\nRiposo: " + kcal_riposo + "kcal - :" + durata_riposo + " min" +
                                 "\nTotale Calorie Bruciate Nette: " + tot_cal_bruciate + " kcal" +
-                                "\nHai raggiunto il (" + percentuale_obiettivo + "%) dell'obiettivo");
+                                "\nHai raggiunto il (" + (int) percentuale_obiettivo + "%) dell'obiettivo");
                     }
                 }
                 else

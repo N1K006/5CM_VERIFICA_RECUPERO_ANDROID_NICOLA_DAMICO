@@ -10,12 +10,14 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:stretchColumns="*"
         android:shrinkColumns="*"
-        app:layout_constraintTop_toTopOf="parent"
+        android:stretchColumns="*"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TableRow
             android:layout_width="match_parent"
@@ -29,12 +31,14 @@
 
                 <EditText
                     android:id="@+id/t_obb_kcal"
-                    android:layout_width="match_parent"
+                    android:layout_width="650dp"
                     android:layout_height="wrap_content"
+                    android:minHeight="48dp"
+                    android:layout_marginBottom="8dp"
                     android:ems="10"
                     android:hint="Calorie"
-                    android:inputType="number"
-                    android:layout_marginBottom="8dp" />
+                    android:inputType="number" />
+
 
                 <Button
                     android:id="@+id/b_obb_kcal"
@@ -54,61 +58,61 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="100"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
                 android:paddingStart="0dp"
-                android:paddingEnd="0dp">
+                android:paddingTop="8dp"
+                android:paddingEnd="0dp"
+                android:paddingBottom="8dp"
+                android:weightSum="100">
 
                 <Button
                     android:id="@+id/but_corsa"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="22"
-                    android:minWidth="0dp"
-                    android:textSize="12sp"
-                    android:maxLines="1"
+                    android:backgroundTint="@color/corsa_blue"
                     android:ellipsize="none"
+                    android:maxLines="1"
+                    android:minWidth="0dp"
                     android:onClick="b_corsa"
                     android:text="Corsa"
-                    android:backgroundTint="@color/corsa_blue" />
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/but_ciclismo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="28"
-                    android:textSize="12sp"
-                    android:maxLines="1"
+                    android:backgroundTint="@color/ciclismo_green"
                     android:ellipsize="none"
+                    android:maxLines="1"
                     android:onClick="b_ciclismo"
                     android:text="Ciclismo"
-                    android:backgroundTint="@color/ciclismo_green" />
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/but_palestra"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="28"
-                    android:textSize="12sp"
-                    android:maxLines="1"
+                    android:backgroundTint="@color/palestra_orange"
                     android:ellipsize="none"
+                    android:maxLines="1"
                     android:onClick="b_palestra"
                     android:text="Palestra"
-                    android:backgroundTint="@color/palestra_orange" />
+                    android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/but_riposo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="22"
-                    android:minWidth="0dp"
-                    android:textSize="12sp"
-                    android:maxLines="1"
+                    android:backgroundTint="@color/riposo_gray"
                     android:ellipsize="none"
+                    android:maxLines="1"
+                    android:minWidth="0dp"
                     android:onClick="b_riposo"
                     android:text="Riposo"
-                    android:backgroundTint="@color/riposo_gray" />
+                    android:textSize="12sp" />
 
             </LinearLayout>
         </TableRow>
@@ -127,29 +131,29 @@
                     android:id="@+id/t_durata"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:ems="10"
-                    android:inputType="number"
-                    android:visibility="gone"
                     android:hint="Durata (min)"
-                    android:layout_marginBottom="8dp" />
+                    android:inputType="number"
+                    android:visibility="gone" />
 
                 <EditText
                     android:id="@+id/t_kcal_bruciate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
                     android:ems="10"
-                    android:inputType="number"
-                    android:visibility="gone"
                     android:hint="Calorie bruciate"
-                    android:layout_marginBottom="8dp" />
+                    android:inputType="number"
+                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/but_invia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:onClick="b_invia"
-                    android:visibility="gone"
-                    android:text="Invia" />
+                    android:text="Invia"
+                    android:visibility="gone" />
 
             </LinearLayout>
         </TableRow>
